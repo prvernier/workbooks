@@ -1,43 +1,59 @@
-# Caribou Analysis and Modelling
-### Seasonal movements, habitat selection, and landscape connectivity
+## Encrypted Static (Quarto) Website
 
-BEACONs Project
-2025-12-30
+This is a skeleton template for a [Quarto website](https://quarto.org/docs/websites/) that is password protected and deployed on GitHub Pages.
 
-# Introduction
+The website is built and deployed on GitHub Actions.
 
-The objective of this report is to analyse movement patterns, habitat use, and functional connectivity of caribou herds intersecting the Liard First Nations (LFN) traditional territory in southeast Yukon and northcentral BC. Products will include i) a detailed report describing methods and results (this document), ii) a set of maps identifying seasonal ranges, movement corridors and habitat suitability, and iii) online apps and dashboards allowing users to further explore the results of the analyses. This is a live document that will be revised regularly as the analysis proceeds and based on feedback from collaborators.
+The GitHub Action, [`quarto-staticrypt-ghpages.yml`](.github/workflows/quarto-staticrypt-ghpages.yml) does the following:
 
-![](pics/caribou1.jpg)
+- Renders the Quarto project via `quarto render`.
+- Adds password via `staticrypt`
+- deploys to Github Pages (given correct configuration as per below)
 
-## Caribou
+It assumes any computations are run locally and tracked via the [Freeze execution option](https://quarto.org/docs/projects/code-execution.html#freeze) (i.e. `freeze: true` in `_quarto.yml`).
 
-Caribou play an important role for LFN, serving as a keystone species in local ecosystems and having cultural significance for Indigenous communities. Ecologically, caribou contribute to the health of boreal forests by influencing vegetation patterns and providing food for predators. Culturally, caribou provide food, materials for clothing and tools, and are a central part of local traditions and knowledge. Consequently, the conservation of their seasonal ranges, including winter foraging grounds and summer calving and grazing areas, is important for the health and long-term persistence of the population. However, these habitats are increasingly threatened by human activities and disturbances, particularly large-scale resource development like mining, which leads to habitat fragmentation and landscape alteration.
+Use the "Use this template" button to create a new private GitHub repo with all the files in this repo.
 
-The establishment of Indigenous Protected and Conserved Areas (IPCAs) and other protected lands are important tools for ensuring the long-term survival of caribou populations, as they allow for the management of these threats. These areas enable collaborative stewardship, respect traditional ecological knowledge, and support sustainable use, thus contributing to the persistence of caribou and their habitats. By prioritizing both ecological integrity and cultural continuity, IPCAs can thus strengthen conservation and sustainable land management now and in the future. As part of this project, we will evaluate the contribution of the proposed IPCAs to seasonal movements, habitat selection, and landscape connectivity.
+## Configure password and protected pages
 
-### Northern mountain caribou
+Modify website build and encryption settings in [`quarto-staticrypt-ghpages.yml`](.github/workflows/quarto-staticrypt-ghpages.yml) as necessary:
+   ```
+   build:
+   ...
+   env:
+      PROTECTED_DIR: _site
+      PASSWORD: password
+      # PASSWORD: ${{ secrets.YOUR_SECRET }}
+   ```
 
-There are 26 herds of Northern Mountain caribou in Yukon occupying most of the south and central regions (Environment Yukon 2016). Nine of the herds intersect the LFN area of interest (Figure 1), with four herds crossing over into British Columbia (Swan Lake, Little Rancheria, Horseranch, and Liard Plateau). Each herd is managed based on its unique range and population characteristics (Ref). Population monitoring relies on aerial surveys and long-term data to assess herd status, recruitment (calf survival), and sex ratios.
+   * `PROTECTED_DIR` should match your Quarto project output directory, which by default is `output_dir: _site`.
+      * To protect a folder of pages rather than your whole website, modify `_site` to `_site/folder`.
+   * `PASSWORD` sets the encryption password for all pages in `PROTECTED_DIR`.
+      * For simplicity, the password is specified by default in plain-text as shown. This means anyone who can access the repository can open this file and read the password. Therefore, make sure your repository remains PRIVATE.
+      * A more secure option, with *slightly* more setup is to store the password in a [GitHub Secret](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions). Follow these [instructions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) to add secret repository variable that stores your password separately from the github action file. Make sure you comment/uncomment the relevant `PASSWORD:` line, and the name of your secret matches what's in the file (e.g. `YOUR_SECRET`)
 
-![](pics/fig1.png)
+## Configure GitHub Pages Site Deployment
 
-**Figure 1**. Distribution Northern Mountain Caribou herds intersecting the LFN area of interest.
+1. Go to `Settings/Pages` and find "Build and deployment" and set "Source" to "GitHub Actions".
+2. A little further down the page, check "Enforce HTTPS"
 
-Table 1 summarizes the status of the nine Northern Mountain Caribou herds that intersect the the LFN traditional territory, providing a snapshot of their population health and monitoring status. Population estimates range widely, from the smallest herd, Liard Plateau (151 individuals surveyed in 2011), to the largest, Finlayson (3,359 individuals surveyed in 2022). Monitoring effort is inconsistent; while some herds like Coal River, Finlayson, Little Rancheria, and Wolf Lake were recently surveyed (2021-2022), others, including Horseranch, Labiche, Liard Plateau, and South Nahanni, have not been surveyed in over a decade, leaving their population trends "Unknown." Of the recently monitored herds, Finlayson, Swan Lake, and Wolf Lake are considered "Stable" or "Stable/Increasing," while Coal River is "Decreasing/Stable" and Little Rancheria is "Likely declining," highlighting varying levels of conservation concern across the region.
+## Updating your Quarto Website
 
-**Table 1**. Status of woodland caribou herd populations in Yukon (Ref).
+1. Make changes to `.qmd` files. Commit as needed
+2. Re-render your website, with `freeze: true`. This should create/update the rendered content in `_site/`, and cache any computational output in `_freeze`.
+3. Commit the `_freeze` folder. `_site` is ignored by default (in [`.gitignore`](.gitignore)) since the GitHub Action renders and deploys the website from source.
+4. Push your changes to GitHub. The push should trigger the action, which will render the website using the frozen computation output, encrypt the specified pages, then deploy the protected website to GitHub pages.
 
-| Herd                         | Population Estimate | Last Surveyed |       Trend       |
-| :--------------------------- | :-----------------: | :-----------: | :---------------: |
-| Coal River                   |        1,203        |     2022      | Decreasing/Stable |
-| Finlayson                    |        3,359        |     2022      | Stable/Increasing |
-| Horseranch                   |         600         |     1999      |      Unknown      |
-| Little Rancheria<sup>1</sup> |         742         |     2022      | Likely declining  |
-| Labiche                      |         450         |     1993      |      Unknown      |
-| Liard Plateau                |         151         |     2011      |      Unknown      |
-| South Nahanni                |        2,105        |     2009      |      Unknown      |
-| Swan Lake                    |         702         |     2021      |      Stable       |
-| Wolf Lake                    |        1,184        |     2022      |      Stable       |
+## Adding encryption to existing Quarto Website
 
-<sup>1</sup> Little Rancheria Caribou Population Estimate 2022 (Ref?)
+To add encryption to an existing website, simply:
+
+1. Copy and paste [`quarto-staticrypt-ghpages.yml`](.github/workflows/quarto-staticrypt-ghpages.yml) into `.github/workflows/` your existing repo, creating the folder if it doesn't exist.
+2. configure GitHub Pages to deploy from GitHub Actions as per instructions above.
+
+## Modify Action to run Computations before rendering Quarto Website.
+
+If you want to run your computations on GitHub actions before rendering the website:
+
+- uncomment the R code steps in the `build` job of [`quarto-staticrypt-ghpages.yml`](.github/workflows/quarto-staticrypt-ghpages.yml)
+- [optional] change `freeze: true` to `auto` or `false` in [`_quarto.yml`](quarto.yml)
