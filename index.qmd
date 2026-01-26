@@ -1,5 +1,64 @@
 ---
-title: Home
+title: Caribou Movement Analysis
+subtitle: Space use, habitat selection, and connectivity
+date: 2026-01-14
 ---
 
-This is a test repo
+# Introduction
+
+The objective of this project is to analyse movement patterns, habitat use, and functional connectivity of caribou herds intersecting the Liard First Nations (LFN) traditional territory in southeast Yukon and northcentral BC. Products will include i) a detailed report describing methods and results (this document), ii) a set of maps identifying seasonal ranges, movement corridors and habitat suitability, and iii) online apps and dashboards allowing users to further explore the results of the analyses. This is a live document that will be revised regularly as the analysis proceeds and based on feedback from collaborators.
+
+The objective of this project is to analyse movement patterns, habitat use, and functional connectivity of caribou in southeast Yukon and northcentral BC. Products will include i) a detailed report describing methods, ii) a set of maps identifying seasonal ranges and movement corridors, and iii) an app allowing users to explore the results of the analyses. This is a live document that will be revised regularly as the analysis proceeds and based on feedback from collaborators.
+
+## Objectives
+
+The specific objectives of the project include:
+
+-   Identify annual and seasonal ranges (population- and individual-level).
+-   Identify seasonal corridors/movement paths (population- and individual-level).
+-   Develop habitat models and generate predictive maps.
+-   Develop resistance surfaces and generate connectivity maps.
+
+A detailed workplan can be viewed [here](https://docs.google.com/document/d/1p0pAv9950JJwcaKug6WJn6BYHQrtLv95NQadZrdo8iE/).
+
+<center>![](pics/caribou1.jpg){width="600"}</center>
+
+<br>
+
+# Organization of website
+
+## Section 1 - Caribou
+
+-   Overview
+-   Little Rancheria
+-   Wolf Lake
+
+## Section 2 - Space use and habitat selection
+
+-   Seasonal and annual ranges
+-   Seasonal movement paths
+-   Resource selection functions
+
+## Section 3 - Movement
+
+-   objectives
+-   methods (presentation)
+-   products
+
+## Section 4 - Connectivity
+
+-   objectives
+-   methods (presentation)
+-   products
+
+## Section 5 - Apps
+
+-   Movement Mapper app
+-   Movement Explorer app
+-   Range Viewer dashboard
+-   Path Viewer dashboard
+
+## Section 6 - Resources
+
+-   Glossary
+-   References

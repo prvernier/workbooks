@@ -1,0 +1,11 @@
+---
+title: "Movement apps and dashboards"
+---
+
+We are developing several interactive apps and dashboards in support of the project. The apps (i.e., Movement Mapper and Movement Explorer) are intended to be general apps that can be used with any movement data. The dashboards (i.e., Range Viewer and Path Viewer), on the other hand, are meant to help viewers explore the results of some of the analyses undertaken in this project. Consequently, they are hard coded to the project data.
+
+- [Movement Mapper app](https://beaconsproject.shinyapps.io/movement_mapper) - Assists in defining movement segments, particularly seasonal migrations.
+- [Movement Explorer app](https://beaconsproject.shinyapps.io/movement_explorer) - Simple app for visualing and analysing movement data
+- [Range Viewer dashboard](https://beaconsproject.shinyapps.io/range_viewer) - Dashboard to visualize the output of seasonal and home range analysis
+- [Path Viewer dashboard](https://beaconsproject.shinyapps.io/path_viewer) - Dashboard to visualize the output of movement path analysis
+

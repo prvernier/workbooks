@@ -2,16 +2,39 @@ project:
   type: website
 
 website:
-  title: "Nothing to see here"
+  page-navigation: true
+  title: "LFN Caribou Project"
   navbar:
-    left:
-      - index.qmd
-      - about.qmd
-  
-execute: 
-  freeze: true
-
-date-format: "D MMMM YYYY"
+    pinned: true
+    background: "#E16462"
+    right:
+      - text: Home
+        file: index.qmd
+      - text: "Caribou"
+        file: caribou.qmd
+      - text: "Space use"
+        file: space_use.qmd
+      - text: "Habitat selection"
+        file: habitat_selection.qmd
+      - text: "Connectivity"
+        file: connectivity.qmd
+      - text: "Apps"
+        file: apps.qmd
+      - text: "Resources"
+        file: resources.qmd
 
 format:
-  html: default
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    code-tools: false
+    code-fold: true
+    code-link: true
+    highlight-style: github
+
+execute:
+  freeze: auto
+  echo: true
